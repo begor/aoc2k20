@@ -16,19 +16,23 @@
 # In this example, traversing the map using this slope would cause you to encounter 7 trees.
 # Starting at the top-left corner of your map and following a slope of right 3 and down 1, how many trees would you encounter?
 from strutils import split
+from sequtils import map, foldl
 
-proc countTrees(map: seq[string]): int =
+proc countTrees(map: seq[string], trajectory: (int, int)): int =
     var (row, col) = (0, 0)
-    var rowSize = map.len()
-    var colSize = map[0].len()
+    let (rowInc, colInc) = trajectory
+    let rowSize = map.len()
+    let colSize = map[0].len()
     while row < map.len():
-        var (r, c) = (row mod rowSize, col mod colSize)
+        let (r, c) = (row mod rowSize, col mod colSize)
         
         if map[r][c] == '#':
             result += 1
         
-        row += 1
-        col += 3
+        row += rowInc
+        col += colInc
 
-var map = readFile("trajectory.txt").string.split("\n")
-echo countTrees(map)
+const map = readFile("trajectory.txt").string.split("\n")
+const trajectories = @[(1, 1), (1, 3), (1, 5), (1, 7), (2, 1)]
+
+echo trajectories.map(proc (trajectory: (int, int)): int = return countTrees(map, trajectory)).foldl(a * b)
