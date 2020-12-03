@@ -48,7 +48,7 @@ proc validatePolicy(passwordPolicy: PasswordPolicy): bool =
 # 2-9 c: ccccccccc is invalid: both position 2 and position 9 contain c.
 # How many passwords are valid according to the new interpretation of the policies?
 
-proc validatePolicyV2(passwordPolicy: PasswordPolicy): bool = 
+func validatePolicyV2(passwordPolicy: PasswordPolicy): bool = 
     var (first, second) = (passwordPolicy.min-1, passwordPolicy.max-1)
     var password = passwordPolicy.password
     var ch = passwordPolicy.character

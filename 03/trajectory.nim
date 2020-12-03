@@ -18,7 +18,7 @@
 from strutils import split
 from sequtils import map, foldl
 
-proc countTrees(map: seq[string], trajectory: (int, int)): int =
+func countTrees(map: seq[string], trajectory: (int, int)): int =
     var (row, col) = (0, 0)
     let (rowInc, colInc) = trajectory
     let rowSize = map.len()

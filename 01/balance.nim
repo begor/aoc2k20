@@ -16,11 +16,10 @@
 # Using the above example again, the three entries that sum to 2020 are 979, 366, and 675. Multiplying them together produces the answer, 241861950.
 # In your expense report, what is the product of the three entries that sum to 2020?
 import algorithm
-import sets
 from sequtils import map
 from strutils import parseInt, split
 
-proc twoSumIndecies(xs: seq[int], target: int): (int, int) =
+func twoSumIndecies(xs: seq[int], target: int): (int, int) =
     var start = 0
     var fin = xs.len() - 1
     result = (-1, -1)
@@ -38,7 +37,7 @@ proc twoSumIndecies(xs: seq[int], target: int): (int, int) =
 
 # A + B + C = T
 # A + B = T - C
-proc threeSumIndecies(xs: seq[int], target: int): (int, int, int) =
+func threeSumIndecies(xs: seq[int], target: int): (int, int, int) =
     for first, x in xs:
         var (second, third) = twoSumIndecies(xs, target - x)
         if second >= 0 and third >= 0 and first != second and first != third:
